@@ -1547,7 +1547,17 @@
       function parseIcsDate(value) {
         if (!value) return null;
 
-        const isoValue = value.replace(/Z$/, "");
+        const trimmed = String(value).trim();
+
+        if (/^\d{8}$/.test(trimmed)) {
+          const year = Number(trimmed.slice(0, 4));
+          const month = Number(trimmed.slice(4, 6));
+          const day = Number(trimmed.slice(6, 8));
+          const date = new Date(year, month - 1, day);
+          return Number.isNaN(date.getTime()) ? null : date;
+        }
+
+        const isoValue = trimmed.replace(/Z$/, "");
         const date = new Date(isoValue);
 
         return Number.isNaN(date.getTime()) ? null : date;
@@ -1595,6 +1605,23 @@
         });
 
         return parsedEvents;
+      }
+
+      function showCalendarEmbed() {
+        const calendar = document.getElementById("calendar");
+        calendar.innerHTML = "";
+
+        const embedUrl = `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(calendarId)}&ctz=Asia%2FKolkata&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&height=600&wkst=1&bgcolor=%230b1220`;
+        const iframe = document.createElement("iframe");
+        iframe.src = embedUrl;
+        iframe.title = "SOT Alliance calendar";
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("scrolling", "no");
+        iframe.style.width = "100%";
+        iframe.style.minHeight = "620px";
+        iframe.style.border = "0";
+        iframe.style.borderRadius = "18px";
+        calendar.appendChild(iframe);
       }
 
       function showCalendarNotice(message) {
@@ -1703,22 +1730,26 @@
             calendarEvents = [];
             calendarLink.href = publicCalendarUrl;
             if (calendarAdminLink) calendarAdminLink.href = publicCalendarUrl;
-            renderCalendar();
-            showCalendarNotice("No public events are published yet. Check the Google Calendar for upcoming dates.");
+            showCalendarEmbed();
             return;
           }
 
           calendarEvents = parseCalendarData(icsText);
           calendarLink.href = publicCalendarUrl;
           if (calendarAdminLink) calendarAdminLink.href = publicCalendarUrl;
+
+          if (calendarEvents.length === 0) {
+            showCalendarEmbed();
+            return;
+          }
+
           renderCalendar();
         } catch (error) {
           console.warn("Google Calendar feed is unavailable or empty in this browser context:", error);
           calendarEvents = [];
           calendarLink.href = publicCalendarUrl;
           if (calendarAdminLink) calendarAdminLink.href = publicCalendarUrl;
-          renderCalendar();
-          showCalendarNotice("No public events are published yet. Check the Google Calendar for upcoming dates.");
+          showCalendarEmbed();
         }
       }
 
