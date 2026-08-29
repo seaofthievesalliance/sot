@@ -367,6 +367,19 @@
         gap: 22px;
       }
 
+      .team-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        gap: 22px;
+      }
+
+      .team-grid > * {
+        flex: 0 0 240px;
+        width: 240px;
+      }
+
       .card {
         position: relative;
         background: linear-gradient(
@@ -380,6 +393,12 @@
         padding: 28px;
         overflow: hidden;
         transition: 0.35s;
+      }
+
+      .team-link {
+        display: block;
+        color: inherit;
+        text-decoration: none;
       }
 
       .card::before {
@@ -420,6 +439,91 @@
       .card p {
         color: var(--muted);
         line-height: 1.7;
+      }
+
+      .partners-section {
+        padding-top: 70px;
+      }
+
+      .partner-feature {
+        width: min(100%, 1000px);
+        margin: 0 auto;
+      }
+
+      .partner-card {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        width: 100%;
+        min-height: 190px;
+        padding: 28px 32px;
+        background: linear-gradient(
+          145deg,
+          rgba(18, 38, 45, 0.92),
+          rgba(6, 11, 14, 0.96)
+        );
+        border: 1px solid rgba(214, 169, 54, 0.35);
+        border-radius: 14px;
+        text-decoration: none;
+        color: var(--white);
+        transition: 0.35s ease;
+      }
+
+      .partner-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(214, 169, 54, 0.7);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      }
+
+      .partner-logo {
+        flex: 0 0 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .partner-logo img {
+        display: block;
+        width: 180px;
+        height: auto;
+        max-height: 100px;
+        object-fit: contain;
+      }
+
+      .partner-content {
+        flex: 1;
+      }
+
+      .partner-content h3 {
+        margin: 0 0 12px;
+        font-family: Cinzel, serif;
+        color: var(--gold-light);
+        font-size: clamp(24px, 2vw, 30px);
+      }
+
+      .partner-content p {
+        margin: 0;
+        color: #dfe7ea;
+        line-height: 1.75;
+      }
+
+      .partner-arrow {
+        flex: 0 0 48px;
+        width: 48px;
+        height: 48px;
+        border: 1px solid rgba(214, 169, 54, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold-light);
+        font-size: 24px;
+        transition: 0.35s ease;
+      }
+
+      .partner-card:hover .partner-arrow {
+        background: var(--gold);
+        color: #050708;
       }
 
       /* =========================
@@ -1138,6 +1242,15 @@
       }
 
       @media (max-width: 600px) {
+        .team-grid {
+          gap: 18px;
+        }
+
+        .team-grid > * {
+          flex-basis: min(240px, calc(100vw - 48px));
+          width: min(240px, calc(100vw - 48px));
+        }
+
         .google-calendar-wrap iframe {
           height: 620px;
         }
@@ -1226,12 +1339,12 @@
           <a href="plans.html" class="btn btn-gold"> ⚓ VIEW PLANS </a>
 
           <a
-          class="btn btn-gold"
-          href="https://discord.gg/BegFdeUTZy"
-          target="_blank"
-        >
-          JOIN DISCORD
-        </a>
+            class="btn btn-gold"
+            href="https://discord.gg/BegFdeUTZy"
+            target="_blank"
+          >
+            JOIN DISCORD
+          </a>
         </div>
       </div>
 
@@ -1319,6 +1432,48 @@
       </div>
     </section>
 
+    <!-- PARTNERS -->
+
+    <section class="partners-section" id="partners">
+      <div class="container">
+        <div class="section-title">
+          <small>PARTNERED</small>
+
+          <h2>ALLIED PIRATE NETWORK</h2>
+
+          <p>Trusted crews and platforms that help keep the adventure alive.</p>
+        </div>
+
+        <div class="partner-feature">
+          <a
+            href="https://truckershub.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="partner-card"
+          >
+            <div class="partner-logo">
+              <img
+                src="https://truckershub.in/images/brand.png"
+                alt="TruckersHub"
+              />
+            </div>
+
+            <div class="partner-content">
+              <h3>TruckersHub</h3>
+
+              <p>
+                TruckersHub is an official partner platform that helps track
+                jobs, organize crews, and support community management for the
+                wider gaming community.
+              </p>
+            </div>
+
+            <div class="partner-arrow" aria-hidden="true">→</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- EVENTS -->
 
     <section class="calendar" id="events">
@@ -1386,7 +1541,7 @@
           <h2>MEET THE ALLIANCE</h2>
         </div>
 
-        <div class="grid">
+        <div class="grid team-grid">
           <div class="card team-card">
             <div class="avatar avatar-dgb">
               <img
@@ -1401,8 +1556,9 @@
           </div>
 
           <div class="card team-card">
-            <div class="avatar">⚓</div>
-
+            <div class="avatar">
+              <img src="assets/SANJU.png" alt="YT54NJU Logo" />
+            </div>
             <h3>YT54NJU</h3>
 
             <p>⚓ Event Captain • Community Events</p>
@@ -1420,6 +1576,52 @@
 
             <p>🛡️ Moderator • 2ND</p>
           </div>
+
+          <div class="card team-card">
+            <div class="avatar">
+              <img src="assets/Chinmayyyyyy.webp" alt="Chinmayyyyyy" />
+            </div>
+            <h3>Chinmayyyyyy</h3>
+            <p>🛠️ Developer Team</p>
+          </div>
+
+          <div class="card team-card">
+            <div class="avatar">
+              <img src="assets/youknowwho.webp" alt="InsanoDeath" />
+            </div>
+            <h3>YouKnowWho</h3>
+            <p>🛡️ Moderator</p>
+          </div>
+
+          <a
+            class="team-link"
+            href="http://insanodev.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="card team-card">
+              <div class="avatar">
+                <img src="assets/insanodeath.webp" alt="InsanoDeath" />
+              </div>
+              <h3>InsanoDeath</h3>
+              <p>🛠️ Developer Team</p>
+            </div>
+          </a>
+
+          <a
+            class="team-link"
+            href="https://linktr.ee/reaper8f"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="card team-card">
+              <div class="avatar">
+                <img src="assets/reaper.jpg" alt="Reaper8f" />
+              </div>
+              <h3>Reaper8f</h3>
+              <p>🛠️ Developer Team</p>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -1474,10 +1676,7 @@
               <span>◆</span>
             </div>
 
-            <a
-              class="donation-action"
-              href="plans.html"
-            >
+            <a class="donation-action" href="plans.html">
               VISIT PLANS <span>›</span>
             </a>
           </div>
@@ -1657,7 +1856,7 @@
         currentDate = new Date(
           currentDate.getFullYear(),
           currentDate.getMonth() - 1,
-          1
+          1,
         );
         loadCalendarEvents();
       }
@@ -1666,7 +1865,7 @@
         currentDate = new Date(
           currentDate.getFullYear(),
           currentDate.getMonth() + 1,
-          1
+          1,
         );
         loadCalendarEvents();
       }
@@ -1678,7 +1877,7 @@
         if (!apiKey) {
           renderCalendar();
           showCalendarNotice(
-            "Google Calendar is connected, but a Google Calendar API key is required to display events here."
+            "Google Calendar is connected, but a Google Calendar API key is required to display events here.",
           );
           return;
         }
@@ -1686,12 +1885,12 @@
         const monthStart = new Date(
           currentDate.getFullYear(),
           currentDate.getMonth(),
-          1
+          1,
         );
         const monthEnd = new Date(
           currentDate.getFullYear(),
           currentDate.getMonth() + 1,
-          1
+          1,
         );
 
         const params = new URLSearchParams({
@@ -1726,7 +1925,7 @@
           calendarEvents = [];
           renderCalendar();
           showCalendarNotice(
-            "Unable to load the Google Calendar right now. Please use OPEN FULL CALENDAR to view the latest events."
+            "Unable to load the Google Calendar right now. Please use OPEN FULL CALENDAR to view the latest events.",
           );
         }
       }
